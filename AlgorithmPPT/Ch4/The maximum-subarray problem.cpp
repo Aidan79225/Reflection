@@ -23,7 +23,7 @@ Point brute-force-solution(){
             if(ans.max < temp){
                 ans.max = temp;
                 ans.buyDay = i;
-                ans.sellDay = i;
+                ans.sellDay = j;
             }
         }
     }
