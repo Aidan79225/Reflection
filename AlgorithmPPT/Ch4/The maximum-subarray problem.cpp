@@ -8,9 +8,15 @@ class Point{
     int max = 0;
     int buyDay = 0;
     int sellDay = 0;
+    Point(int max,int buyDay,int sellDay){
+        this.max = max;
+        this.buyDay = buyDay;
+        this.sellDay = sellDay;
+    }
+        
 }
 Point brute-force-solution(){
-    Point ans;
+    Point ans(0,0,0);
     for(int i = 0 ; i < DAYS-1 ; i++){
         for(int j =i+1 ; j < DAYS ; j++){
             int temp = price[j]-price[i];
@@ -28,8 +34,39 @@ void init(){
         change[i] = price[i]-price[i-1];
     }
 }
-void divide(){
+Point divide(){
     init();
-    
+    return 
+}
+Point findMaxCrossingSubArray(int low,int mid,int high){
+    int leftSum = INT_MIN,maxLeft = mid;
+    int sum = 0;
+    Point a;
+    for(int i = mid ; i >= low ; i--){
+        sum += change[i];
+        if(sum > leftSum){
+            leftSum = sum;
+            a.buyDay = i;
+        }
+    }
+    int rightSum = INT_MIN,maxRight = mid;
+    sum = 0;
+    for(int i = mid+1 ; i < high ; i++){
+        sum += change[i];
+        if(sum > rightSum){
+            rightSum = sum;
+            a.sellDay = i;
+        }
+    }
+    a.max = rightSum + leftSum;
+    return a;
+}
+Point findMaxSubArray(int low, int high){
+    if(low == high)return new Point(change[low],low,high);
+    int mid = (low + high)/2;
+    Point leftP = findMaxSubArray(low,mid);
+    Point rightP = findMaxSubArray(low,mid);
+    Point midP = findMaxCrossingSubArray(low,mid,high);
+    return leftP.max >= midP.max ? (leftP.max >= rightP.max ? leftP : rightP) : (rightP.max >= midP.max ? rightP : midP);
 }
 
