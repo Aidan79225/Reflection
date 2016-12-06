@@ -36,7 +36,7 @@ void init(){
 }
 Point divide(){
     init();
-    return 
+    return findMaxSubArray(0,DAYS-1);
 }
 Point findMaxCrossingSubArray(int low,int mid,int high){
     int leftSum = INT_MIN,maxLeft = mid;
