@@ -67,7 +67,9 @@ Point findMaxSubArray(int low, int high){
     Point leftP = findMaxSubArray(low,mid);
     Point rightP = findMaxSubArray(mid+1,right);
     Point midP = findMaxCrossingSubArray(low,mid,high);
-    return leftP.max >= midP.max ? (leftP.max >= rightP.max ? leftP : rightP) : (rightP.max >= midP.max ? rightP : midP);
+    return leftP.max >= midP.max ?         
+        (leftP.max >= rightP.max ?leftP : rightP) : 
+        (rightP.max >= midP.max ? rightP : midP);
 }
 
 Point findMaxPointUsingDP(){
