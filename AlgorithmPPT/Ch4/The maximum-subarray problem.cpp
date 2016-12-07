@@ -70,3 +70,22 @@ Point findMaxSubArray(int low, int high){
     return leftP.max >= midP.max ? (leftP.max >= rightP.max ? leftP : rightP) : (rightP.max >= midP.max ? rightP : midP);
 }
 
+Point findMaxPointUsingDP(){
+    int temp[DAYS] ={0}; 
+    Point ans(0,0,0);
+    for(int i=1;i<DAYS;i++){
+        temp[i] += change[i];
+        if(temp[i] == 0)temp[i] = 0;
+        if(temp[i] > max){
+            a.max = temp[i];
+            a.sell = i;
+        }
+    }
+    for(int i = sell;i>=0;i--){
+        if(temp[i] == 0 ){
+            a.buy = i;
+            break;
+        }
+    }
+    return ans;
+}
